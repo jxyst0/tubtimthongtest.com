@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+<body><div class="page-container">
+        <div class="logo">
+            <div id="allboxing" class="allbox">
+                <img class="fish" src="fishh.png">
+        <h1>รายการอาหาร</h1>
+        <input type="text" id="searchInput" placeholder="ค้นหาเมนู..." onkeyup="searchMenu()" class="search-box" />
+        </div>
+        </div>
+
+        <div class="main-content">
+            <div id="productbox" class="product">
+            <!--<div class="product-items">
+            <img src="https://scontent.fcnx2-1.fna.fbcdn.net/v/t1.15752-9/506599543_1270474911188135_4821844415599892095_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=9f807c&_nc_ohc=LY5aIBbrx3cQ7kNvwE2zNQs&_nc_oc=AdnJi4W2oLDFKzWgXF7_z6Z8cesdXGraQb53OJ1RwWeLHUaw0altrro72lWL-O-rFlE&_nc_zt=23&_nc_ht=scontent.fcnx2-1.fna&oh=03_Q7cD2gFtn12AA4eZ8-OeLBwwvdX0BE1CtOLBbjuuSMQV-3W_1A&oe=687E5265">
+            <div class="product-info">
+                <h3>ผักทอด</h3>
+                <p>60 THB</p>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="list">
+        <h2>รายการอาหาร</h2>
+        <div id="listbox" class="list-box">
+            <p>โปรดเลือกรายการอาหาร</p>
+            <!---<div class="list-item">
+                <p>[x2]name</p>
+                <p>20 THB</p>
+            </div>-->
+
+            <!---<div class="list-item list-summary">
+                <p>รวมราคา</p>
+                <p>200 THB</p>
+            </div>-->
+        </div>
+
+        <div class="list-control">
+
+            <button onclick="clearlist()" class="btn btn-danger">
+                ยกเลิก
+            </button>
+
+            <button onclick="printlistnew()" class="btn btn-success">
+                พิมพ์ใบเสร็จ
+            </button>
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="index.js"></script>
+
+</body>
+</html>

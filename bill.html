@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ใบเสร็จ</title>
+  <style>
+    body {
+      width: 42mm;
+      margin: 0 auto;
+      font-family: monospace;
+      font-size: 12px;
+    }
+    .receipt {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+    .center {
+      text-align: center;
+    }
+    .list-item {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px dashed #000;
+      padding: 2px 0;
+    }
+    .list-item-header {
+      display: flex;
+      justify-content: space-between;
+    }
+    .list-item-header p {
+      margin: 0;
+      white-space: nowrap;
+    }
+    .list-summary {
+      font-weight: bold;
+      border-top: 1px solid #000;
+      padding-top: 4px;
+      margin-top: 4px;
+    }
+    .line {
+      border-top: 1px dashed #000;
+      margin: 4px 0;
+    }
+    .fish {
+      width: 120px;
+      height: 80px;
+      margin: 0%;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="receipt">
+    <div class="center">
+      <img class="fish" src="https://scontent.fbkk22-8.fna.fbcdn.net/v/t1.15752-9/508349059_1671863264204735_4082948148346175147_n.png?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFAT8AJTfDMED3ptw6mjohMhGF9W8L8I--EYX1bwvwj78_CexZREU7hH9QiW9mBZvFmsMtl6gafNEVGhAjdYUxJ&_nc_ohc=naQrIslrpkoQ7kNvwHEl69e&_nc_oc=AdlJv_ZZbY9JOeUegmqsgb8cxOGwbwlRuyQuNDLUFmWNOgDh3RqBYbk9pPaLCJ1I5Ls&_nc_zt=23&_nc_ht=scontent.fbkk22-8.fna&oh=03_Q7cD2gERWQdbd20BiHyiZXClzHhzmx9mdafMC13ZAjrKsUJ0IQ&oe=68862DCD">
+        <strong style="font-size: 19px;">ทับทิมทอง</strong><br>
+      168 หมู่ 10 ต.ข่วงเปา อ.จอมทอง จ.เชียงใหม่<br>
+      โทร. 089-554-8203
+    </div>
+    <div class="line"></div>
+
+    <div>วันที่: <span id="date"></span></div>
+    <div>เวลา: <span id="time"></span></div>
+    <div class="line"></div>
+
+    <div id="list">
+      <!-- JS ใส่รายการ -->
+    </div>
+
+    <div class="line"></div>
+    <div class="center">*** ขอบคุณที่อุดหนุน ***</div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script>
+    $(document).ready(() => {
+      const now = new Date();
+      $('#date').text(now.toLocaleDateString('th-TH'));
+      $('#time').text(now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }));
+
+      var list = JSON.parse(localStorage.getItem('menulist') || '[]');
+      var html = '';
+      var sumprice = 0;
+
+      list.forEach(item => {
+        const total = item.price * item.count;
+        sumprice += total;
+        html += `
+          <div class="list-item">
+            <div class="list-item-header">
+              <p>[x${item.count}]</p>
+              <p>${numberWithComma(total)}฿</p>
+            </div>
+            <div>
+              <p>${item.name}</p>
+            </div>
+          </div>
+        `;
+      });
+
+      html += `
+        <div class="list-item list-summary">
+          <div class="list-item-header">
+            <p>รวมทั้งหมด</p>
+            <p>${numberWithComma(sumprice)}฿</p>
+          </div>
+        </div>
+      `;
+
+      $('#list').html(html).promise().done(() => {
+        window.print();
+      });
+    });
+
+    function numberWithComma(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  </script>
+</body>
+</html>
